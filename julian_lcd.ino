@@ -3,7 +3,8 @@
 #include <TFT_eSPI.h>
 #include <SPI.h>
 
-#define BUTTON_PIN 21 // GPIO21 for the button
+#define BUTTON_PIN1 21 // GPIO21 for the first button
+#define BUTTON_PIN2 19 // GPIO19 for the second button
 
 unsigned long lastDebounceTime = 0; // For debouncing
 unsigned long debounceDelay = 50;   // 50ms debounce time
@@ -11,6 +12,8 @@ unsigned long debounceDelay = 50;   // 50ms debounce time
 TFT_eSPI tft = TFT_eSPI(); // Invoke library, pins defined in User_Setup.h
 
 int randomNumber; // Declare globally
+
+bool button1Pressed = false;
 
 void setup() {
   Serial.begin(9600);
@@ -21,30 +24,82 @@ void setup() {
   tft.fillScreen(TFT_BLACK);
   tft.setTextColor(TFT_BLACK, TFT_WHITE);
 
-  pinMode(BUTTON_PIN, INPUT_PULLUP); // Configure button pin with internal pull-up
+  pinMode(BUTTON_PIN1, INPUT_PULLUP); // Configure button pin 1 with internal pull-up
+  pinMode(BUTTON_PIN2, INPUT_PULLUP); // Configure button pin 2 with internal pull-up
 
   randomSeed(analogRead(0)); // Seed the random number generator
 }
 
 void loop() {
-  int buttonState = digitalRead(BUTTON_PIN);
+  int buttonState1 = digitalRead(BUTTON_PIN1);
+  int buttonState2 = digitalRead(BUTTON_PIN2);
 
-  if (buttonState == LOW) { // Button is pressed
-    randomNumber = random(1, 7); // Generate random number
-    Serial.println("Button pressed!");
-    Serial.println("Random number: " + String(randomNumber));
-    Serial.println("---------------------------------");
-    
-
-    // Clear the previous drawing
-    tft.fillScreen(TFT_BLACK);
-
-    // Draw the dice with the new random number
-    drawD6(80, 40, 50, TFT_RED, randomNumber);
+  if (buttonState1 == LOW) { // Button is pressed
+    for(int i = 0 ; i < 14 ; i++){
+      randomNumber = random(1, 7); // Generate random number
+      Serial.println("Button 1 pressed!");
+      Serial.println("Random number: " + String(randomNumber));
+      Serial.println("---------------------------------");
+      
+      // Clear the previous drawing
+      tft.fillScreen(TFT_BLACK);
+      switch(i){
+        case 1:
+          drawD6(80, 40, 50, TFT_RED, randomNumber);
+          button1Pressed = true;
+          break;
+        case 2:
+          drawD6(80, 40, 50, TFT_ORANGE, randomNumber);
+          break;
+        case 3:
+          drawD6(80, 40, 50, TFT_YELLOW, randomNumber);
+          break;
+        case 4:
+          drawD6(80, 40, 50, TFT_GREEN, randomNumber);
+          break;
+        case 5:
+          drawD6(80, 40, 50, TFT_BLUE, randomNumber);
+          break;
+        case 6:
+          drawD6(80, 40, 50, TFT_VIOLET, randomNumber);
+          break;
+        case 7:
+          drawD6(80, 40, 50, TFT_RED, randomNumber);
+          break;
+        case 8:
+          drawD6(80, 40, 50, TFT_ORANGE, randomNumber);
+          break;
+        case 9:
+          drawD6(80, 40, 50, TFT_YELLOW, randomNumber);
+          break;
+        case 10:
+          drawD6(80, 40, 50, TFT_GREEN, randomNumber);
+          break;
+        case 11:
+          drawD6(80, 40, 50, TFT_BLUE, randomNumber);
+          break;
+        case 12:
+          drawD6(80, 40, 50, TFT_VIOLET, randomNumber);
+          break;
+        case 13:
+          drawD6(80, 40, 50, TFT_BLACK, randomNumber);
+          break;
+      }
+      delay(100);
+    }
   } else { // Button is not pressed
-    Serial.println("Button Released!");
+    if(button1Pressed = true){
+      drawD6(80, 40, 50, TFT_WHITE, randomNumber);
+      button1Pressed = false;
+    }
+    Serial.println("Button 1 released!");
   }
-  delay(1000);
+  if (buttonState2 == LOW){
+    Serial.println("Button 2 pressed!");
+  } else {
+    Serial.println("Button 2 released!");
+  }
+  delay(100);
 }
 
 void drawD6(int x, int y, int size, uint16_t color, int face) {
