@@ -13,7 +13,9 @@ unsigned long debounceDelay = 50;   // 50ms debounce time
 TFT_eSPI tft = TFT_eSPI(); // Invoke library, pins defined in User_Setup.h
 
 bool button1Pressed = false; // Bool to control button control
+bool button2Pressed = false;
 int diceQuantity = 0;
+int choiceCount = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -22,18 +24,32 @@ void setup() {
   tft.init();
   tft.setRotation(3);
   tft.fillScreen(TFT_BLACK);
-  tft.setTextColor(TFT_BLACK, TFT_WHITE);
+  tft.setTextColor(TFT_WHITE, TFT_BLACK);
 
   pinMode(BUTTON_PIN1, INPUT_PULLUP); // Configure button pin 1 with internal pull-up
   pinMode(BUTTON_PIN2, INPUT_PULLUP); // Configure button pin 2 with internal pull-up
 
   randomSeed(analogRead(0)); // Seed the random number generator
 
+  // Draw menu
+  int size = 25;
+  int halfSize = size / 2;
+  tft.drawRect(50 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Option 1, coin flip
+  tft.drawRect(110 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Option 2, d6 dice
   // drawD2(80, 40, 50, TFT_WHITE, randomRoll(2));
 
 }
 
 void loop() {
+
+  int size = 25;
+  int halfSize = size / 2;
+
+  // Keep choiceCount within range of choices
+  if(choiceCount > 2){
+    choiceCount = 0;
+  }
+
   int buttonState1 = digitalRead(BUTTON_PIN1);
   int buttonState2 = digitalRead(BUTTON_PIN2);
 
@@ -42,11 +58,45 @@ void loop() {
 
   
   if (buttonState2 == LOW){
+    button2Pressed = true;
     Serial.println("Button 2 pressed!");
-    Serial.println(randomRoll(6));
+    tft.fillScreen(TFT_BLACK);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    choiceCount++;
+
+    // Switch case for choiceCount options
+    switch(choiceCount){
+      case 0:
+        tft.fillScreen(TFT_BLACK);
+        break;
+      case 1:
+        tft.drawRect(110 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 2
+        tft.fillRect(50 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Option 1, coin flip
+        tft.drawCentreString("d2", 80, 40 - 10, 4);
+        break;
+      case 2:
+        tft.drawRect(50 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 1
+        tft.fillRect(110 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Option 2, d6 dice
+        tft.drawCentreString("d6", 80, 40 - 10, 4);
+        break;
+    button2Pressed = false;
+    }
   } else {
+    button2Pressed = false;
     // Serial.println("Button 2 released!");
   }
+
+  if(buttonState1 == LOW){
+    switch(choiceCount){
+      case 1:
+        d2();
+        break;
+      case 2:
+        d6();
+        break;
+    }
+  }
+
   delay(1000);
 }
 
@@ -198,14 +248,15 @@ void d6(){
           drawD6(80, 40, 50, TFT_RED, randomRoll(6));
           break;
         case 13:
-          drawD6(80, 40, 50, TFT_BLACK, randomRoll(6));
+          delay(1000);
+          button1Pressed = false;
+          drawD6(80, 40, 50, TFT_WHITE, randomRoll(6));
           break;
       }
       delay(75);
     }
   } else { // Button is not pressed
     if(button1Pressed == true){
-      drawD6(80, 40, 50, TFT_WHITE, randomRoll(6));
       button1Pressed = false;
     }
   }
@@ -217,8 +268,6 @@ void d2(){
   if (buttonState1 == LOW && !button1Pressed) { // Button is pressed
     for(int i = 0 ; i < 14 ; i++){
       // Serial.println("Button 1 pressed!");
-      // Serial.println("Random number: " + String(randomNumber));
-      // Serial.println("---------------------------------");
       
       // Clear the previous drawing
       tft.fillScreen(TFT_BLACK);
@@ -261,14 +310,15 @@ void d2(){
           drawD2(80, 40, 50, TFT_RED, randomRoll(2));
           break;
         case 13:
-          drawD2(80, 40, 50, TFT_BLACK, randomRoll(2));
+          delay(1000);
+          button1Pressed = false;
+          drawD2(80, 40, 50, TFT_WHITE, randomRoll(2));
           break;
       }
       delay(110);
     }
   } else { // Button is not pressed
     if(button1Pressed == true){
-      drawD2(80, 40, 50, TFT_WHITE, randomRoll(2));
       button1Pressed = false;
     }
   }
