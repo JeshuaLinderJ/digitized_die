@@ -34,19 +34,20 @@ void setup() {
   // Draw menu
   int size = 25;
   int halfSize = size / 2;
-  tft.drawRect(50 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Option 1, coin flip
-  tft.drawRect(110 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Option 2, d6 dice
+  tft.fillRect(17.5 - halfSize, 37.5 - halfSize, size, size, TFT_WHITE); // Option 1, d2
+  tft.fillRect(77.5 - halfSize, 37.5 - halfSize, size, size, TFT_WHITE); // Option 2, d4
+  tft.fillRect(137.5 - halfSize, 37.5 - halfSize, size, size, TFT_WHITE); // Option 3, d6
   // drawD2(80, 40, 50, TFT_WHITE, randomRoll(2));
 
 }
 
 void loop() {
 
-  int size = 25;
+  int size = 20;
   int halfSize = size / 2;
 
   // Keep choiceCount within range of choices
-  if(choiceCount > 2){
+  if(choiceCount > 3){
     choiceCount = 0;
   }
 
@@ -61,25 +62,35 @@ void loop() {
     button2Pressed = true;
     Serial.println("Button 2 pressed!");
     tft.fillScreen(TFT_BLACK);
-    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.setTextColor(TFT_BLACK, TFT_BLACK);
     choiceCount++;
 
     // Switch case for choiceCount options
-    switch(choiceCount){
-      case 0:
-        tft.fillScreen(TFT_BLACK);
-        break;
-      case 1:
-        tft.drawRect(110 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 2
-        tft.fillRect(50 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Option 1, coin flip
-        tft.drawCentreString("d2", 80, 40 - 10, 4);
-        break;
-      case 2:
-        tft.drawRect(50 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 1
-        tft.fillRect(110 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Option 2, d6 dice
-        tft.drawCentreString("d6", 80, 40 - 10, 4);
-        break;
-    button2Pressed = false;
+  switch(choiceCount){
+    case 0:
+      tft.fillScreen(TFT_BLACK);
+      break;
+    case 1:
+      tft.drawRect(80 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 2
+      tft.drawRect(140 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 3
+      tft.fillRect(20 - halfSize, 40 - halfSize, size, size, TFT_RED); // Option 1, coin flip
+      tft.setTextColor(TFT_BLACK, TFT_RED);
+      tft.drawCentreString("d2", 10, 30, 3);
+      break;
+    case 2:
+      tft.drawRect(20 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 1
+      tft.drawRect(140 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 3
+      tft.fillRect(80 - halfSize, 40 - halfSize, size, size, TFT_ORANGE); // Option 2, d6 dice
+      tft.setTextColor(TFT_BLACK, TFT_ORANGE);
+      tft.drawCentreString("d4", 70, 30, 3);
+      break;
+    case 3:
+      tft.drawRect(20 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 1
+      tft.drawRect(80 - halfSize, 40 - halfSize, size, size, TFT_WHITE); // Clear option 2
+      tft.fillRect(140 - halfSize, 40 - halfSize, size, size, TFT_YELLOW); // Option 3, d4 dice
+      tft.setTextColor(TFT_BLACK, TFT_YELLOW);
+      tft.drawCentreString("d6", 130, 30, 3);
+      break;
     }
   } else {
     button2Pressed = false;
@@ -92,6 +103,9 @@ void loop() {
         d2();
         break;
       case 2:
+        d4();
+        break;
+      case 3:
         d6();
         break;
     }
@@ -175,6 +189,33 @@ void drawD2(int x, int y, int size, uint16_t color, int face) {
   }
 }
 
+void drawD4(int x, int y, int size, uint16_t color, int face) {
+  int halfSize = size / 2;
+
+  // Draw heads or tails based on face number
+  if(face == 1) {
+    // Draw heads
+    tft.fillTriangle(x, y - halfSize + 5, x - halfSize + 5, y + halfSize - 5, x + halfSize - 5, y + halfSize - 5, color);
+    tft.setTextColor(TFT_BLACK, color);
+    tft.drawCentreString("1", x, y - 10, 4);
+  } else if(face == 2){
+    // Draw tails
+    tft.fillTriangle(x, y - halfSize + 5, x - halfSize + 5, y + halfSize - 5, x + halfSize - 5, y + halfSize - 5, color);
+    tft.setTextColor(TFT_BLACK, color);
+    tft.drawCentreString("2", x, y - 10, 4);
+  } else if(face == 3){
+    // Draw tails
+    tft.fillTriangle(x, y - halfSize + 5, x - halfSize + 5, y + halfSize - 5, x + halfSize - 5, y + halfSize - 5, color);
+    tft.setTextColor(TFT_BLACK, color);
+    tft.drawCentreString("3", x, y - 10, 4);
+  } else if(face == 4){
+    // Draw tails
+    tft.fillTriangle(x, y - halfSize + 5, x - halfSize + 5, y + halfSize - 5, x + halfSize - 5, y + halfSize - 5, color);
+    tft.setTextColor(TFT_BLACK, color);
+    tft.drawCentreString("4", x, y - 10, 4);
+  }
+}
+
 int randomRoll(int d){ // Roll logic per d#, using standard die used in DnD, and percentage value roll under d100 (%)
   switch(d){
     case 2:
@@ -198,69 +239,6 @@ int randomRoll(int d){ // Roll logic per d#, using standard die used in DnD, and
   }
 }
 
-void d6(){
-  int buttonState1 = digitalRead(BUTTON_PIN1);
-  int buttonState2 = digitalRead(BUTTON_PIN2);
-  if (buttonState1 == LOW && !button1Pressed) { // Button is pressed
-    for(int i = 0 ; i < 14 ; i++){
-      Serial.println("Button 1 pressed!");
-      // Serial.println("Random number: " + String(randomNumber));
-      // Serial.println("---------------------------------");
-      
-      // Clear the previous drawing
-      tft.fillScreen(TFT_BLACK);
-      switch(i){
-        case 1:
-          drawD6(80, 40, 50, TFT_RED, randomRoll(6));
-          button1Pressed = true;
-          break;
-        case 2:
-          drawD6(80, 40, 50, TFT_ORANGE, randomRoll(6));
-          break;
-        case 3:
-          drawD6(80, 40, 50, TFT_YELLOW, randomRoll(6));
-          break;
-        case 4:
-          drawD6(80, 40, 50, TFT_GREEN, randomRoll(6));
-          break;
-        case 5:
-          drawD6(80, 40, 50, TFT_BLUE, randomRoll(6));
-          break;
-        case 6:
-          drawD6(80, 40, 50, TFT_PURPLE, randomRoll(6));
-          break;
-        case 7:
-          drawD6(80, 40, 50, TFT_VIOLET, randomRoll(6));
-          break;
-        case 8:
-          drawD6(80, 40, 50, TFT_BLUE, randomRoll(6));
-          break;
-        case 9:
-          drawD6(80, 40, 50, TFT_GREEN, randomRoll(6));
-          break;
-        case 10:
-          drawD6(80, 40, 50, TFT_YELLOW, randomRoll(6));
-          break;
-        case 11:
-          drawD6(80, 40, 50, TFT_ORANGE, randomRoll(6));
-          break;
-        case 12:
-          drawD6(80, 40, 50, TFT_RED, randomRoll(6));
-          break;
-        case 13:
-          delay(1000);
-          button1Pressed = false;
-          drawD6(80, 40, 50, TFT_WHITE, randomRoll(6));
-          break;
-      }
-      delay(75);
-    }
-  } else { // Button is not pressed
-    if(button1Pressed == true){
-      button1Pressed = false;
-    }
-  }
-}
 
 void d2(){
   int buttonState1 = digitalRead(BUTTON_PIN1);
@@ -316,6 +294,69 @@ void d2(){
           break;
       }
       delay(110);
+    }
+  } else { // Button is not pressed
+    if(button1Pressed == true){
+      button1Pressed = false;
+    }
+  }
+}
+
+
+void d6(){
+  int buttonState1 = digitalRead(BUTTON_PIN1);
+  int buttonState2 = digitalRead(BUTTON_PIN2);
+  if (buttonState1 == LOW && !button1Pressed) { // Button is pressed
+    for(int i = 0 ; i < 14 ; i++){
+      Serial.println("Button 1 pressed!");
+      
+      // Clear the previous drawing
+      tft.fillScreen(TFT_BLACK);
+      switch(i){
+        case 1:
+          drawD6(80, 40, 50, TFT_RED, randomRoll(6));
+          button1Pressed = true;
+          break;
+        case 2:
+          drawD6(80, 40, 50, TFT_ORANGE, randomRoll(6));
+          break;
+        case 3:
+          drawD6(80, 40, 50, TFT_YELLOW, randomRoll(6));
+          break;
+        case 4:
+          drawD6(80, 40, 50, TFT_GREEN, randomRoll(6));
+          break;
+        case 5:
+          drawD6(80, 40, 50, TFT_BLUE, randomRoll(6));
+          break;
+        case 6:
+          drawD6(80, 40, 50, TFT_PURPLE, randomRoll(6));
+          break;
+        case 7:
+          drawD6(80, 40, 50, TFT_VIOLET, randomRoll(6));
+          break;
+        case 8:
+          drawD6(80, 40, 50, TFT_BLUE, randomRoll(6));
+          break;
+        case 9:
+          drawD6(80, 40, 50, TFT_GREEN, randomRoll(6));
+          break;
+        case 10:
+          drawD6(80, 40, 50, TFT_YELLOW, randomRoll(6));
+          break;
+        case 11:
+          drawD6(80, 40, 50, TFT_ORANGE, randomRoll(6));
+          break;
+        case 12:
+          drawD6(80, 40, 50, TFT_RED, randomRoll(6));
+          break;
+        case 13:
+          delay(1000);
+          button1Pressed = false;
+          drawD6(80, 40, 50, TFT_WHITE, randomRoll(6));
+          break;
+      }
+      delay(75);
     }
   } else { // Button is not pressed
     if(button1Pressed == true){
