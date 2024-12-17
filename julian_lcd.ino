@@ -69,7 +69,7 @@ void loop() {
         tft.fillScreen(TFT_BLACK);
         break;
       case 1:
-        tft.fillRect(16, 16, size, size, TFT_WHITE);
+        tft.fillRect(16, 16, size, size, TFT_RED);
         tft.drawRect(128, 48, size, size, TFT_WHITE);
 
         tft.drawRect(16, 48, size, size, TFT_WHITE); 
@@ -83,7 +83,7 @@ void loop() {
         tft.drawString("D2", 18, 36);
         break;
       case 2:
-        tft.fillRect(48, 16, size, size, TFT_WHITE);
+        tft.fillRect(48, 16, size, size, TFT_BROWN);
         tft.drawRect(16, 16, size, size, TFT_WHITE);
 
         tft.drawRect(16, 48, size, size, TFT_WHITE); 
@@ -97,7 +97,7 @@ void loop() {
         tft.drawString("D4", 50, 36);
         break;
       case 3:
-        tft.fillRect(16, 48, size, size, TFT_WHITE);
+        tft.fillRect(16, 48, size, size, TFT_ORANGE);
         tft.drawRect(48, 16, size, size, TFT_WHITE);
 
         tft.drawRect(16, 16, size, size, TFT_WHITE); 
@@ -111,7 +111,7 @@ void loop() {
         tft.drawString("D6", 19, 36);
         break;
       case 4:
-        tft.fillRect(48, 48, size, size, TFT_WHITE);
+        tft.fillRect(48, 48, size, size, TFT_YELLOW);
         tft.drawRect(16, 48, size, size, TFT_WHITE);
 
         tft.drawRect(16, 16, size, size, TFT_WHITE); 
@@ -125,7 +125,7 @@ void loop() {
         tft.drawString("D8", 50, 36);
         break;
       case 5:
-        tft.fillRect(96, 16, size, size, TFT_WHITE);
+        tft.fillRect(96, 16, size, size, TFT_GREEN);
         tft.drawRect(48, 48, size, size, TFT_WHITE);
 
         tft.drawRect(16, 16, size, size, TFT_WHITE); 
@@ -139,7 +139,7 @@ void loop() {
         tft.drawString("D10", 96, 36);
         break;
       case 6:
-        tft.fillRect(128 , 16, size, size, TFT_WHITE);
+        tft.fillRect(128 , 16, size, size, TFT_BLUE);
         tft.drawRect(96, 16, size, size, TFT_WHITE);
 
         tft.drawRect(16, 16, size, size, TFT_WHITE); 
@@ -153,7 +153,7 @@ void loop() {
         tft.drawString("D12", 128, 36);
         break;
       case 7:
-        tft.fillRect(96, 48, size, size, TFT_WHITE);
+        tft.fillRect(96, 48, size, size, TFT_PURPLE);
         tft.drawRect(96 , 16, size, size, TFT_WHITE);
 
         tft.drawRect(16, 16, size, size, TFT_WHITE); 
@@ -167,7 +167,7 @@ void loop() {
         tft.drawString("D20", 96, 36);
         break;
       case 8:
-        tft.fillRect(128, 48, size, size, TFT_WHITE);
+        tft.fillRect(128, 48, size, size, TFT_VIOLET);
         tft.drawRect(96, 48, size, size, TFT_WHITE);
 
         tft.drawRect(16, 16, size, size, TFT_WHITE); 
