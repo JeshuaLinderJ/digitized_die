@@ -204,10 +204,10 @@ void loop() {
         d12();
         break;
       case 7:
-        d12();
+        d20();
         break;
       case 8:
-        d12();
+        d20();
         break;
     }
     button1Pressed = false; // reset flag
@@ -1171,6 +1171,328 @@ void drawD12(int x, int y, int size, uint16_t color, int face) { // NOTE: Replac
   }
 }
 
+// ------------------------------------------------
+// D20
+
+void d20(){
+  if (button1Pressed) { // Button is pressed
+    button1Pressed = false; // reset flag
+    for(int i = 0 ; i < 14 ; i++){
+      // Serial.println("Button 1 pressed!");
+      // Clear the previous drawing
+      tft.fillScreen(TFT_BLACK);
+      switch(i){
+        case 1:
+          drawD20(80, 29, 50, TFT_RED, randomRoll(20));
+          break;
+        case 2:
+          drawD20(80, 29, 50, TFT_ORANGE, randomRoll(20));
+          break;
+        case 3:
+          drawD20(80, 29, 50, TFT_YELLOW, randomRoll(20));
+          break;
+        case 4:
+          drawD20(80, 29, 50, TFT_GREEN, randomRoll(20));
+          break;
+        case 5:
+          drawD20(80, 29, 50, TFT_BLUE, randomRoll(20));
+          break;
+        case 6:
+          drawD20(80, 29, 50, TFT_PURPLE, randomRoll(20));
+          break;
+        case 7:
+          drawD20(80, 29, 50, TFT_VIOLET, randomRoll(20));
+          break;
+        case 8:
+          drawD20(80, 29, 50, TFT_BLUE, randomRoll(20));
+          break;
+        case 9:
+          drawD20(80, 29, 50, TFT_GREEN, randomRoll(20));
+          break;
+        case 10:
+          drawD20(80, 29, 50, TFT_YELLOW, randomRoll(20));
+          break;
+        case 11:
+          drawD20(80, 29, 50, TFT_ORANGE, randomRoll(20));
+          break;
+        case 12:
+          drawD20(80, 29, 50, TFT_RED, randomRoll(20));
+          break;
+        case 13:
+          delay(1000);
+          // draw10(80, 30, 50, TFT_WHITE, randomRoll(10));
+          drawD20(80, 29, 50, TFT_WHITE, 20);
+          break;
+      }
+      delay(110);
+    }
+  }
+}
+
+void drawD20(int x, int y, int size, uint16_t color, int face) { // NOTE: Replace triangle logic with lines to avoid visual bugs
+  int halfSize = size / 2;
+  if(face == 1) {
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_WHITE);
+    tft.drawCentreString("1", 80, 30, 4);
+  } else if(face == 2){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("2", 80, 30, 4);
+  } else if(face == 3){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("3", 80, 30, 4);
+  } else if(face == 4){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("4", 80, 30, 4);
+  } else if(face == 5){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("5", 80, 30, 4);
+  } else if(face == 6){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("6", 80, 30, 4);
+  } else if(face == 7){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("7", 80, 30, 4);
+  } else if(face == 8){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("8", 80, 30, 4);
+  } else if(face == 9){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("9", 80, 30, 4);
+  } else if(face == 10){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("10", 80, 30, 4);
+  } else if(face == 11){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("11", 80, 30, 4);
+  } else if(face == 12) {
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_WHITE);
+    tft.drawCentreString("12", 80, 30, 4);
+  } else if(face == 13){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("13", 80, 30, 4);
+  } else if(face == 14){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("14", 80, 30, 4);
+  } else if(face == 15){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("15", 80, 30, 4);
+  } else if(face == 16){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("16", 80, 30, 4);
+  } else if(face == 17){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("17", 80, 30, 4);
+  } else if(face == 18){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("18", 80, 30, 4);
+  } else if(face == 19){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("19", 80, 30, 4);
+  } else if(face == 20){
+    tft.drawTriangle(80, 5, 50, 20, 64, 30, color);
+    tft.drawTriangle(50, 20, 64, 30, 50, 52, color);
+    tft.drawTriangle(50, 52, 64, 30, 80, 56, color);
+    tft.drawTriangle(80, 56, 50, 52, 80, 70, color);
+    tft.drawTriangle(80, 70, 80, 56, 108, 52, color);
+    tft.drawTriangle(108, 52, 80, 56, 96, 30, color);
+    tft.drawTriangle(96, 30, 108, 52, 108, 20, color);
+    tft.drawTriangle(108, 20, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 5, color);
+    tft.drawTriangle(64, 30, 96, 30, 80, 56, color);
+    tft.setTextColor(TFT_WHITE, TFT_BLACK);
+    tft.drawCentreString("20", 80, 30, 4);
+  }
+}
 // ================================================
 // Random roll logic
 
