@@ -684,7 +684,7 @@ void drawD10Logic(int x, int y, int size, uint16_t color, int face) { // NOTE: R
   } else if(face == 10){drawD10("10", color);}
 }
 
-drawD10(String face, uint16_t color){
+void drawD10(String face, uint16_t color){
   tft.drawTriangle(48, 40, 80, 8, 64, 38, color);
   tft.drawTriangle(48, 40, 80, 72, 64, 38, color);
   tft.fillTriangle(80, 42, 80, 72, 64, 38, TFT_BLACK);
@@ -776,7 +776,7 @@ void drawD12Logic(int x, int y, int size, uint16_t color, int face) { // NOTE: R
   } else if(face == 12){drawD12("12", color);}
 }
 
-drawD12(String face, uint16_t color){
+void drawD12(String face, uint16_t color){
   tft.drawLine(58, 18, 66, 12, color);
   tft.drawLine(66, 12, 94, 12, color);
   tft.drawLine(94, 12, 102, 18, color);
