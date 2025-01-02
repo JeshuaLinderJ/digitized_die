@@ -61,6 +61,7 @@ Code:
 Implementation:
 - 3d printed casing mimicking real dice
 - Portable setup with battery
+- Future implementation with GUI linked DnD module project
 
 ***
 
